@@ -32,3 +32,11 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
     },
   };
 }
+
+export function Node(value = null, key = null, nextNode = null) {
+  return {
+    value,
+    key,
+    nextNode,
+  };
+}

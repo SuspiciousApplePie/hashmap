@@ -1,4 +1,10 @@
-import { HashMap } from "./hashmap";
+import { HashMap, Node } from "./hashmap";
+
+describe("Node test", () => {
+  test("Test node with no value", () => {
+    expect(Node()).toStrictEqual({ key: null, value: null, nextNode: null });
+  });
+});
 describe("Hash test", () => {
   const map = HashMap();
   test("Test with one letter", () => {
@@ -15,7 +21,7 @@ describe("Hash test", () => {
   });
 });
 
-describe("Set test", () => {
+describe("Get test", () => {
   test("Test with non existent key", () => {
     const map = HashMap();
     expect(map.get("Aether")).toBe(null);
