@@ -16,16 +16,10 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
     hash,
     get: (key) => {
       const hashedKey = hash(key);
-      let value = null;
       let list = buckets[hashedKey];
-      if (!list) return value;
-      let cur = list;
-      while (cur.nextNode) {
-        if (cur.key === key) {
-          value = cur.value;
-        } else {
-          cur = cur.nextNode;
-        }
+      let value = null;
+      if (buckets[hashedKey]) {
+        value = list.findValue(key);
       }
 
       return value;
