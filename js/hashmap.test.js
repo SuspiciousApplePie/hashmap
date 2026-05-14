@@ -1,5 +1,5 @@
 import { HashMap } from "./hashmap";
-describe("hash test", () => {
+describe("Hash test", () => {
   const map = HashMap();
   test("Test with one letter", () => {
     expect(map.hash("A")).toBe(1);
@@ -12,5 +12,12 @@ describe("hash test", () => {
   });
   test("Test with non string", () => {
     expect(() => map.hash(123)).toThrow("key should be string");
+  });
+});
+
+describe("Set test", () => {
+  test("Test with non existent key", () => {
+    const map = HashMap();
+    expect(map.get("Aether")).toBe(null);
   });
 });
