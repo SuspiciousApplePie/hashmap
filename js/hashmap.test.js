@@ -27,3 +27,37 @@ describe("Get test", () => {
     expect(map.get("Aether")).toBe(null);
   });
 });
+
+describe("Set test", () => {
+  test("Adding from empty", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    expect(starRail.get("trailblazer")).toBe("caelus");
+  });
+
+  test("Add that causes collusion", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    expect(starRail.get("f")).toBe("feixiao");
+  });
+
+  test("Add multiple items", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("dan feng", "dan heng");
+    starRail.set("marchie", "march 7th");
+    starRail.set("f", "feixiao");
+    expect(starRail.get("marchie")).toBe("march 7th");
+    expect(starRail.get("dan feng")).toBe("dan heng");
+    expect(starRail.get("trailblazer")).toBe("caelus");
+    expect(starRail.get("f")).toBe("feixiao");
+  });
+
+  test("Similar key", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("trailblazer", "stelle");
+    expect(starRail.get("trailblazer")).toBe("stelle");
+  });
+});

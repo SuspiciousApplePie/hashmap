@@ -24,10 +24,27 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
 
       return value;
     },
+    set: (key, value) => {
+      const hashedKey = hash(key);
+      if (!buckets[hashedKey]) {
+        const node = Node(key, value);
+        const list = LinkedList();
+        buckets[hashedKey] = list;
+        list.append(node);
+        return;
+      }
+
+      const list = buckets[hashedKey];
+      const update = list.update(key, value);
+      if (!update) {
+        const node = Node(key, value);
+        list.append(node);
+      }
+    },
   };
 }
 
-export function Node(value = null, key = null, nextNode = null) {
+export function Node(key = null, value = null, nextNode = null) {
   return {
     value,
     key,
