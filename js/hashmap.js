@@ -1,6 +1,8 @@
 export function HashMap(loadFactor = 0.75, capacity = 16) {
+  let buckets = ([].length = capacity);
   return {
     hash: (key) => {
+      if (typeof key !== "string") throw new Error("key should be string");
       let hashCode = 0;
 
       const primeNumber = 31;

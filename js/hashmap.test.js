@@ -10,4 +10,7 @@ describe("hash test", () => {
   test("Test with two letters", () => {
     expect(map.hash("Aether")).toBe(5);
   });
+  test("Test with non string", () => {
+    expect(() => map.hash(123)).toThrow("key should be string");
+  });
 });
