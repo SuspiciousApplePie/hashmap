@@ -113,3 +113,21 @@ describe("Remove test", () => {
     expect(starRail.remove("F")).toBe(false);
   });
 });
+
+describe("Length test", () => {
+  test("check size of 6", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "stelle");
+    starRail.set("general", "feixiao");
+    starRail.set("f", "fu xuan");
+    starRail.set("daniel", "dan heng");
+    starRail.set("rich woman", "asta");
+    starRail.set("marchie", "march 7th");
+    expect(starRail.length()).toBe(6);
+  });
+
+  test("check size of none", () => {
+    const starRail = HashMap();
+    expect(starRail.length()).toBe(0);
+  });
+});

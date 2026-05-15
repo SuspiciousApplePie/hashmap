@@ -56,6 +56,12 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
       if (!buckets[hashedKey]) return false;
       return list.removeKey(key);
     },
+    length: () => {
+      return buckets.reduce((acc, list) => {
+        if (!list) return acc;
+        return acc + list.size();
+      }, 0);
+    },
   };
 }
 
@@ -70,6 +76,7 @@ export function Node(key = null, value = null, nextNode = null) {
 export function LinkedList() {
   let head = null;
   let tail = null;
+  let size = 0;
   return {
     append: (node) => {
       if (!head) {
@@ -79,6 +86,7 @@ export function LinkedList() {
         tail.nextNode = node;
         tail = node;
       }
+      size++;
     },
 
     findValue: (key) => {
@@ -120,15 +128,18 @@ export function LinkedList() {
         if (!prev && key === cur.key) {
           head = next;
           isDeleted = true;
+          size--;
           break;
         } else if (!next && key === cur.key) {
           prev.nextNode = next;
           tail = prev;
           isDeleted = true;
+          size--;
           break;
         } else if (key === cur.key) {
           prev.nextNode = next;
           isDeleted = true;
+          size--;
           break;
         }
         prev = cur;
@@ -137,6 +148,9 @@ export function LinkedList() {
         next = cur.nextNode;
       }
       return isDeleted;
+    },
+    size: () => {
+      return size;
     },
   };
 }
