@@ -131,3 +131,17 @@ describe("Length test", () => {
     expect(starRail.length()).toBe(0);
   });
 });
+
+describe("Clear test", () => {
+  test("Check if clear works", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "stelle");
+    starRail.set("general", "feixiao");
+    starRail.set("f", "fu xuan");
+    starRail.set("daniel", "dan heng");
+    starRail.set("rich woman", "asta");
+    starRail.set("marchie", "march 7th");
+    starRail.clear();
+    expect(starRail.length()).toBe(0);
+  });
+});

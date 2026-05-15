@@ -62,6 +62,9 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
         return acc + list.size();
       }, 0);
     },
+    clear: () => {
+      buckets = new Array(capacity).fill(null);
+    },
   };
 }
 
