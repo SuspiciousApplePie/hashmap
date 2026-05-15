@@ -81,3 +81,35 @@ describe("Has test", () => {
     expect(starRail.has("f")).toBe(false);
   });
 });
+
+describe("Remove test", () => {
+  test("remove one value", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    expect(starRail.remove("f")).toBe(true);
+  });
+
+  test("remove two value", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    expect(starRail.remove("f")).toBe(true);
+    expect(starRail.remove("trailblazer")).toBe(true);
+  });
+
+  test("remove non existent value in empty bucket", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    expect(starRail.remove("g")).toBe(false);
+  });
+
+  test("remove non existent value in list", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    starRail.set("v", "vollerei");
+    expect(starRail.remove("F")).toBe(false);
+  });
+});

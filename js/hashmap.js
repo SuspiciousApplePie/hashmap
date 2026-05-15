@@ -50,6 +50,12 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
       }
       return false;
     },
+    remove: (key) => {
+      const hashedKey = hash(key);
+      const list = buckets[hashedKey];
+      if (!buckets[hashedKey]) return false;
+      return list.removeKey(key);
+    },
   };
 }
 
@@ -90,7 +96,7 @@ export function LinkedList() {
       return value;
     },
 
-    update(key, value) {
+    update: (key, value) => {
       let cur = head;
       let isDuplicate = false;
       while (cur) {
@@ -103,6 +109,34 @@ export function LinkedList() {
         }
       }
       return isDuplicate;
+    },
+
+    removeKey: (key) => {
+      let cur = head;
+      let prev = null;
+      let next = cur.nextNode;
+      let isDeleted = false;
+      while (cur) {
+        if (!prev && key === cur.key) {
+          head = next;
+          isDeleted = true;
+          break;
+        } else if (!next && key === cur.key) {
+          prev.nextNode = next;
+          tail = prev;
+          isDeleted = true;
+          break;
+        } else if (key === cur.key) {
+          prev.nextNode = next;
+          isDeleted = true;
+          break;
+        }
+        prev = cur;
+        cur = cur.nextNode;
+        if (!cur) break;
+        next = cur.nextNode;
+      }
+      return isDeleted;
     },
   };
 }
