@@ -41,6 +41,15 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
         list.append(node);
       }
     },
+    has: (key) => {
+      const hashedKey = hash(key);
+      if (!buckets[hashedKey]) return false;
+      const list = buckets[hashedKey];
+      if (list.findValue(key)) {
+        return true;
+      }
+      return false;
+    },
   };
 }
 

@@ -59,5 +59,25 @@ describe("Set test", () => {
     starRail.set("trailblazer", "caelus");
     starRail.set("trailblazer", "stelle");
     expect(starRail.get("trailblazer")).toBe("stelle");
+    expect(starRail.get("f")).toBe(null);
+  });
+});
+
+describe("Has test", () => {
+  test("check existent value", () => {
+    const starRail = HashMap();
+    starRail.set("babochka", "seele");
+    expect(starRail.has("babochka")).toBe(true);
+  });
+
+  test("check empty list", () => {
+    const starRail = HashMap();
+    expect(starRail.has("babochka")).toBe(false);
+  });
+
+  test("check non existent value in filled bucket", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    expect(starRail.has("f")).toBe(false);
   });
 });
