@@ -180,4 +180,25 @@ describe("Keys test", () => {
     expect(starRail.keys()).toStrictEqual(["trailblazer", "marchie"]);
   });
 });
+
+describe("Values test", () => {
+  test("Display 3 values", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "stelle");
+    starRail.set("f", "feixiao");
+    starRail.set("marchie", "march 7th");
+    expect(starRail.values()).toStrictEqual(["stelle", "feixiao", "march 7th"]);
+  });
+  test("Display 3 values", () => {
+    const starRail = HashMap();
+    expect(starRail.values()).toStrictEqual([]);
+  });
+  test("Display keys after removing item", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "stelle");
+    starRail.set("f", "feixiao");
+    starRail.set("marchie", "march 7th");
+    starRail.remove("f");
+    expect(starRail.values()).toStrictEqual(["stelle", "march 7th"]);
+  });
 });

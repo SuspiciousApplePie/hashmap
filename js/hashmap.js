@@ -74,6 +74,15 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
       });
       return keys;
     },
+    values: () => {
+      let values = [];
+      buckets.forEach((list) => {
+        if (list) {
+          values = values.concat(list.getValues());
+        }
+      });
+      return values;
+    },
   };
 }
 
@@ -163,6 +172,25 @@ export function LinkedList() {
     },
     size: () => {
       return size;
+    },
+    getKeys: () => {
+      let keys = [];
+      let cur = head;
+      while (cur) {
+        keys.push(cur.key);
+        cur = cur.nextNode;
+      }
+      return keys;
+    },
+
+    getValues: () => {
+      let values = [];
+      let cur = head;
+      while (cur) {
+        values.push(cur.value);
+        cur = cur.nextNode;
+      }
+      return values;
     },
   };
 }
