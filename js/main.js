@@ -36,3 +36,6 @@ test.set("grape", "veggie");
 console.log(test.entries());
 console.log(test.get("apple"));
 console.log(test.has("carrot"));
+
+test.clear();
+console.log(test.entries());
