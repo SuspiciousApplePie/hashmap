@@ -83,6 +83,15 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
       });
       return values;
     },
+    entries: () => {
+      let entries = [];
+      buckets.forEach((list) => {
+        if (list) {
+          entries.push(...list.getEntries());
+        }
+      });
+      return entries;
+    },
   };
 }
 
@@ -191,6 +200,19 @@ export function LinkedList() {
         cur = cur.nextNode;
       }
       return values;
+    },
+
+    getEntries: () => {
+      let entries = [];
+      let cur = head;
+      while (cur) {
+        let entry = [];
+        entry.push(cur.key);
+        entry.push(cur.value);
+        entries.push(entry);
+        cur = cur.nextNode;
+      }
+      return entries;
     },
   };
 }

@@ -202,3 +202,53 @@ describe("Values test", () => {
     expect(starRail.values()).toStrictEqual(["stelle", "march 7th"]);
   });
 });
+
+describe("Entries test", () => {
+  test("Display 3 entries", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    starRail.set("marchie", "march 7th");
+    expect(starRail.entries()).toStrictEqual([
+      ["trailblazer", "caelus"],
+      ["f", "feixiao"],
+      ["marchie", "march 7th"],
+    ]);
+  });
+
+  test("Display 5 entries", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    starRail.set("mara struck", "jingliu");
+    starRail.set("marchie", "march 7th");
+    starRail.set("Peerless Gem", "Madam Herta");
+
+    expect(starRail.entries().sort()).toEqual(
+      [
+        ["trailblazer", "caelus"],
+        ["f", "feixiao"],
+        ["mara struck", "jingliu"],
+        ["marchie", "march 7th"],
+        ["Peerless Gem", "Madam Herta"],
+      ].sort(),
+    );
+  });
+
+  test("Display no keys", () => {
+    const starRail = HashMap();
+    expect(starRail.entries()).toStrictEqual([]);
+  });
+
+  test("Display keys after removing item", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "stelle");
+    starRail.set("f", "feixiao");
+    starRail.set("marchie", "march 7th");
+    starRail.remove("f");
+    expect(starRail.entries()).toStrictEqual([
+      ["trailblazer", "stelle"],
+      ["marchie", "march 7th"],
+    ]);
+  });
+});
