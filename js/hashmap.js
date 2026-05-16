@@ -12,8 +12,50 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
 
     return hashCode;
   };
+
+  const set = (key, value) => {
+    const hashedKey = hash(key);
+    if (!buckets[hashedKey]) {
+      const node = Node(key, value);
+      const list = LinkedList();
+      buckets[hashedKey] = list;
+      list.append(node);
+      return;
+    }
+
+    const list = buckets[hashedKey];
+    const update = list.update(key, value);
+    if (!update) {
+      const node = Node(key, value);
+      list.append(node);
+    }
+    if (length() > capacity * loadFactor) resize();
+  };
+
+  const length = () => {
+    return buckets.reduce((acc, list) => {
+      if (!list) return acc;
+      return acc + list.size();
+    }, 0);
+  };
+
+  const resize = () => {
+    capacity *= 2;
+    let oldBuckets = buckets.slice();
+    buckets = new Array(capacity).fill(null);
+    oldBuckets.forEach((list) => {
+      if (list) {
+        const entries = list.getEntries();
+        entries.forEach((entry) => {
+          set(entry[0], entry[1]);
+        });
+      }
+    });
+  };
   return {
     hash,
+    set,
+    length,
     get: (key) => {
       const hashedKey = hash(key);
       let list = buckets[hashedKey];
@@ -23,23 +65,6 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
       }
 
       return value;
-    },
-    set: (key, value) => {
-      const hashedKey = hash(key);
-      if (!buckets[hashedKey]) {
-        const node = Node(key, value);
-        const list = LinkedList();
-        buckets[hashedKey] = list;
-        list.append(node);
-        return;
-      }
-
-      const list = buckets[hashedKey];
-      const update = list.update(key, value);
-      if (!update) {
-        const node = Node(key, value);
-        list.append(node);
-      }
     },
     has: (key) => {
       const hashedKey = hash(key);
@@ -55,12 +80,6 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
       const list = buckets[hashedKey];
       if (!buckets[hashedKey]) return false;
       return list.removeKey(key);
-    },
-    length: () => {
-      return buckets.reduce((acc, list) => {
-        if (!list) return acc;
-        return acc + list.size();
-      }, 0);
     },
     clear: () => {
       buckets = new Array(capacity).fill(null);
