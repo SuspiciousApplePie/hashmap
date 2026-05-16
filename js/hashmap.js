@@ -65,6 +65,15 @@ export function HashMap(loadFactor = 0.75, capacity = 16) {
     clear: () => {
       buckets = new Array(capacity).fill(null);
     },
+    keys: () => {
+      let keys = [];
+      buckets.forEach((list) => {
+        if (list) {
+          keys = keys.concat(list.getKeys());
+        }
+      });
+      return keys;
+    },
   };
 }
 

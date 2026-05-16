@@ -144,4 +144,40 @@ describe("Clear test", () => {
     starRail.clear();
     expect(starRail.length()).toBe(0);
   });
+  test("Check if clear works and add new one", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "stelle");
+    starRail.set("general", "feixiao");
+    starRail.set("f", "fu xuan");
+    starRail.set("daniel", "dan heng");
+    starRail.set("rich woman", "asta");
+    starRail.clear();
+    starRail.set("marchie", "march 7th");
+    expect(starRail.length()).toBe(1);
+  });
+});
+
+describe("Keys test", () => {
+  test("Display 3 keys", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    starRail.set("marchie", "march 7th");
+    expect(starRail.keys()).toStrictEqual(["trailblazer", "f", "marchie"]);
+  });
+
+  test("Display no keys", () => {
+    const starRail = HashMap();
+    expect(starRail.keys()).toStrictEqual([]);
+  });
+
+  test("Display keys after removing item", () => {
+    const starRail = HashMap();
+    starRail.set("trailblazer", "caelus");
+    starRail.set("f", "feixiao");
+    starRail.set("marchie", "march 7th");
+    starRail.remove("f");
+    expect(starRail.keys()).toStrictEqual(["trailblazer", "marchie"]);
+  });
+});
 });
